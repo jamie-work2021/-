@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>市集活動</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@200;300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        @media screen and (min-width: 200px) and (max-width: 960px) {
+            body {
+                background-color: #dbd5d3;
+                margin: 0;
+                padding: 0;
+                /* overflow: hidden; */
+                max-width: 960px;
+            }
+
+            .btn-primary {
+                background-color: rgba(255, 255, 255, 0) !important;
+                color: rgba(175, 173, 170, 0);
+                border-radius: 50%;
+                border-style: none;
+                transform: translate(2rem, 1rem);
+            }
+
+            .background-new {
+                background-color: #c1b6b400 !important;
+            }
+
+
+            .dp-wrap {
+                margin-top: 60px;
+                margin-left: 8px;
+                position: relative;
+                perspective: 600px;
+                height: 80%;
+            }
+
+            .dp-slider {
+                padding-left: 60px;
+                height: 60%;
+                width: 80%;
+                position: absolute;
+                transform-style: preserve-3d;
+            }
+
+            .dp-slider div {
+                transform-style: preserve-3d;
+            }
+
+            .dp_item {
+                display: block;
+                position: absolute;
+                text-align: center;
+                color: #fff;
+                border-radius: 10px;
+                transition: transform 1.2s;
+            }
+
+            .dp-img img {
+                border-left: 1px solid #fff;
+            }
+
+            #dp-slider .dp_item:first-child {
+                z-index: 10 !important;
+                transform: rotateY(0deg) translateX(0px) !important;
+            }
+
+            .dp_item[data-position="2"] {
+                z-index: 9;
+                transform: rotateY(0deg) translateX(10%) scale(0.9);
+            }
+
+            .dp_item[data-position="3"] {
+                z-index: 8;
+                transform: rotateY(0deg) translateX(20%) scale(0.8);
+            }
+
+            .dp_item[data-position="4"] {
+                z-index: 7;
+                transform: rotateY(0deg) translateX(30%) scale(0.7);
+            }
+
+            #dp-next,
+            #dp-prev {
+                position: absolute;
+                top: 50%;
+                right: 10%;
+                height: 20px;
+                width: 12px;
+                z-index: 10;
+                cursor: pointer;
+            }
+
+            #dp-prev {
+                left: 15px;
+                transform: rotate(180deg);
+            }
+
+            #dp-dots {
+                position: absolute;
+                bottom: 25px;
+                z-index: 12;
+                left: 38%;
+                cursor: default;
+            }
+
+            #dp-dots li {
+                display: inline-block;
+                width: 9px;
+                height: 9px;
+                background: #fff;
+                border-radius: 50%;
+            }
+
+            #dp-dots li:hover {
+                cursor: pointer;
+                background: #C1B6B4;
+                transition: background 0.3s;
+            }
+
+            #dp-dots li.active {
+                background: #C1B6B4;
+            }
+
+            .dp_item {
+                width: 85%;
+
+            }
+
+            .dp-content,
+            .dp-img {
+                text-align: left;
+            }
+
+            .dp_item {
+                display: flex;
+                align-items: center;
+                background: #fff;
+                border-radius: 10px;
+                overflow: hidden;
+                border-top: none;
+            }
+
+            .dp-content {
+                padding-left: 20px;
+                padding-right: 0;
+                display: inline-block;
+                width: 60%;
+            }
+
+            .dp-content h2 {
+                color: #41414b;
+                font-family: Circular Std Bold;
+                font-size: 20px;
+                max-width: 100px;
+                margin-top: 8px;
+                margin-bottom: 0px;
+            }
+
+            .dp-content p {
+                color: #74747f;
+                max-width: 100px;
+                margin-top: 15px;
+                font-size: 12px;
+            }
+
+            .dp-content .site-btn {
+                margin-top: 15px;
+                font-size: 5px;
+                padding: 3px 10px;
+            }
+
+            .dp-img:before {
+                background: -webkit-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0.25),
+                        rgba(255, 255, 255, 0));
+                background: -o-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0.25),
+                        rgba(255, 255, 255, 0));
+                background: -moz-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0.25),
+                        rgba(255, 255, 255, 0));
+                background: linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0.75),
+                        rgba(255, 255, 255, 0));
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 25%;
+                z-index: 1;
+                top: 0;
+                pointer-events: none;
+                background: -webkit-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0),
+                        rgba(255, 255, 255, 0.75));
+                background: -o-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0),
+                        rgba(255, 255, 255, 0.75));
+                background: -moz-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0),
+                        rgba(255, 255, 255, 0.75));
+                background: linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0),
+                        rgb(255, 255, 255));
+            }
+
+            .dp-img img {
+                object-fit: cover;
+                object-position: -76px;
+            }
+
+            #dp-slider,
+            .dp-img img {
+                height: 200px;
+            }
+
+            #dp-slider .dp_item:hover:not(:first-child) {
+                cursor: pointer;
+            }
+
+            .site-btn {
+                color: #fff;
+                font-size: 12px;
+                font-family: "Circular Std Medium";
+                background: rgb(170, 111, 63);
+                padding: 2px 5px;
+                display: inline-block;
+                border-radius: 50px;
+                position: relative;
+                top: -10px;
+                text-decoration: none;
+            }
+
+            .site-btn:hover {
+                text-decoration: none;
+                color: #fff;
+            }
+
+
+
+
+
+            @-webkit-keyframes typing {
+                from {
+                    width: 0;
+                }
+            }
+
+            @-webkit-keyframes blink-caret {
+                50% {
+                    border-color: transparent;
+                }
+            }
+
+            h1 {
+                font: bold 120% Consolas, Monaco, monospace;
+                color: white;
+                border-right: .1em solid rgb(255, 255, 255);
+                width: 1rem;
+                width: 21ch;
+                margin: 2em 1em;
+                white-space: nowrap;
+                overflow: hidden;
+                -webkit-animation: typing 5s steps(21, end),
+                    blink-caret .6s step-end infinite alternate;
+            }
+
+
+            .market-title {
+                margin: 20px 5px;
+                text-align: center;
+                font-family: 'Noto Serif TC', serif;
+                color: rgb(105, 98, 98);
+                font-size: 1.5rem;
+
+
+            }
+
+            .market-info-box {
+
+                width: 100%;
+            }
+
+
+
+            .bg-simple {
+                background-color: #ffffffed;
+
+            }
+
+            .info-img-text {
+                margin: 0 auto;
+            }
+
+            .img-container {
+                opacity: .8;
+                margin: 20px auto;
+                width: 80%;
+            }
+
+            .img-container img {
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+
+            }
+
+            .img-container.simple img {
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+                margin-bottom: 30px;
+
+            }
+
+            .info-text {
+                margin: 30px auto;
+                text-align: left;
+                width: 80%;
+                font-family: 'Noto Serif TC', serif;
+                color: rgb(105, 98, 98);
+            }
+
+            .parallax {
+                width: 100%;
+                height: 300px;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                background-position: center;
+            }
+
+            .z1 {
+                background-image: url('./imgs/h12.jpg');
+                opacity: .9;
+                height: 8rem;
+            }
+
+            .z2 {
+                background-image: url('./imgs/h12.jpg');
+                opacity: .9;
+                height: 5rem;
+            }
+
+            .z3 {
+                background-image: url('https://wallpaperscraft.com/image/the_legend_of_zelda_windows_elf_character_link_22308_1920x1080.jpg');
+                height: 10rem;
+            }
+
+            .home-main {
+                border-radius: 50%;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .home-main a {
+                line-height: 2rem;
+                text-align: center;
+                padding: 20px 10px;
+
+                background-color: whitesmoke;
+                color: rgb(200, 172, 172);
+                border-radius: 50%;
+
+            }
+
+        }
+
+
+
+
+        @media screen and (min-width: 961px) and (max-width: 1940px) {
+            body {
+                background-color: #dbd5d3;
+                margin: 0;
+                padding: 0;
+                /* overflow: hidden; */
+                max-width: 1940px;
+            }
+
+            .dp-wrap {
+                margin-top: 120px;
+                margin-left: 100px;
+                position: relative;
+                perspective: 600px;
+                height: 100%;
+            }
+
+            .dp-slider {
+                padding-left: 60px;
+                height: 80%;
+                width: 80%;
+                position: absolute;
+                transform-style: preserve-3d;
+            }
+
+            .dp-slider div {
+                transform-style: preserve-3d;
+            }
+
+            .dp_item {
+                display: block;
+                position: absolute;
+                text-align: center;
+                color: #fff;
+                border-radius: 10px;
+                transition: transform 1.2s;
+            }
+
+            .dp-img img {
+                border-left: 1px solid #fff;
+            }
+
+            #dp-slider .dp_item:first-child {
+                z-index: 10 !important;
+                transform: rotateY(0deg) translateX(0px) !important;
+            }
+
+            .dp_item[data-position="2"] {
+                z-index: 9;
+                transform: rotateY(0deg) translateX(10%) scale(0.9);
+            }
+
+            .dp_item[data-position="3"] {
+                z-index: 8;
+                transform: rotateY(0deg) translateX(20%) scale(0.8);
+            }
+
+            .dp_item[data-position="4"] {
+                z-index: 7;
+                transform: rotateY(0deg) translateX(30%) scale(0.7);
+            }
+
+            #dp-next,
+            #dp-prev {
+                position: absolute;
+                top: 50%;
+                right: 16%;
+                height: 33px;
+                width: 33px;
+                z-index: 10;
+                cursor: pointer;
+            }
+
+            #dp-prev {
+                left: 15px;
+                transform: rotate(180deg);
+            }
+
+            #dp-dots {
+                position: absolute;
+                bottom: 25px;
+                z-index: 12;
+                left: 38%;
+                cursor: default;
+            }
+
+            #dp-dots li {
+                display: inline-block;
+                width: 13px;
+                height: 13px;
+                background: #fff;
+                border-radius: 50%;
+            }
+
+            #dp-dots li:hover {
+                cursor: pointer;
+                background: #C1B6B4;
+                transition: background 0.3s;
+            }
+
+            #dp-dots li.active {
+                background: #C1B6B4;
+            }
+
+            .dp_item {
+                width: 85%;
+
+            }
+
+            .dp-content,
+            .dp-img {
+                text-align: left;
+            }
+
+            .dp_item {
+                display: flex;
+                align-items: center;
+                background: #fff;
+                border-radius: 10px;
+                overflow: hidden;
+                border-top: none;
+            }
+
+            .dp-content {
+                padding-left: 80px;
+                padding-right: 0;
+                display: inline-block;
+                width: 40%;
+            }
+
+            .dp-content h2 {
+                font-family: 'Noto Serif TC', serif;
+                color: #41414b;
+                font-size: 48px;
+                max-width: 360px;
+                margin-top: 8px;
+                margin-bottom: 0px;
+            }
+
+            .dp-content p {
+                font-family: 'Noto Serif TC', serif;
+                color: #74747f;
+                max-width: 250px;
+                margin-top: 15px;
+                font-size: 1.3rem;
+            }
+
+            .dp-content .site-btn {
+                margin-top: 15px;
+                font-size: 18px;
+                padding: 19px 40px;
+            }
+
+            .dp-img:before {
+                background: -webkit-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0.25),
+                        rgba(255, 255, 255, 0));
+                background: -o-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0.25),
+                        rgba(255, 255, 255, 0));
+                background: -moz-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0.25),
+                        rgba(255, 255, 255, 0));
+                background: linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0.75),
+                        rgba(255, 255, 255, 0));
+                content: "";
+                position: absolute;
+                height: 100%;
+                width: 25%;
+                z-index: 1;
+                top: 0;
+                pointer-events: none;
+                background: -webkit-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0),
+                        rgba(255, 255, 255, 0.75));
+                background: -o-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0),
+                        rgba(255, 255, 255, 0.75));
+                background: -moz-linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0),
+                        rgba(255, 255, 255, 0.75));
+                background: linear-gradient(-90deg,
+                        rgba(255, 255, 255, 0),
+                        rgb(255, 255, 255));
+            }
+
+            .dp-img img {
+                object-fit: cover;
+                /* object-position: 20px 100px; */
+            }
+
+            #dp-slider,
+            .dp-img img {
+                height: 500px;
+            }
+
+            #dp-slider .dp_item:hover:not(:first-child) {
+                cursor: pointer;
+            }
+
+            .site-btn {
+                color: #fff;
+                font-size: 18px;
+                font-family: "Circular Std Medium";
+                background: rgb(175, 126, 107);
+                padding: 14px 33px;
+                display: inline-block;
+                border-radius: 50px;
+                position: relative;
+                top: -10px;
+                text-decoration: none;
+            }
+
+            .site-btn:hover {
+                text-decoration: none;
+                color: #fff;
+            }
+
+
+
+
+
+            @-webkit-keyframes typing {
+                from {
+                    width: 0;
+                }
+            }
+
+            @-webkit-keyframes blink-caret {
+                50% {
+                    border-color: transparent;
+                }
+            }
+
+            h1 {
+                font: bold 300% Consolas, Monaco, monospace;
+                color: white;
+                border-right: .1em solid rgb(255, 255, 255);
+                width: 16.5em;
+                width: 21ch;
+                margin: 2em 1em;
+                white-space: nowrap;
+                overflow: hidden;
+                -webkit-animation: typing 5s steps(21, end),
+                    blink-caret .6s step-end infinite alternate;
+            }
+
+
+            .market-title {
+                margin: 50px 5px 80px 5px;
+                text-align: center;
+                font-family: 'Noto Serif TC', serif;
+                color: #fff;
+                font-size: 1.5rem;
+
+
+            }
+
+            .market-info-box {
+                padding: 80px 0px;
+                width: 100%;
+            }
+
+            .bg-simple {
+                background-color: #ffffffed;
+
+            }
+
+            .market-info-box .market-title {
+                color: rgb(105, 98, 98);
+            }
+
+            .info-img-text {
+                display: flex;
+                margin: 0 auto;
+            }
+
+            .img-container {
+                opacity: .8;
+                margin: 0 auto;
+                width: 80%;
+            }
+
+            .img-container img {
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+            }
+
+            .info-text {
+                margin: 100px 40px;
+                text-align: left;
+                width: 80%;
+                font-family: 'Noto Serif TC', serif;
+                color: rgb(105, 98, 98);
+            }
+
+
+            .parallax {
+                width: 100%;
+                height: 300px;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                background-position: center;
+            }
+
+            .z1 {
+                background-image: url('./imgs/h12.jpg');
+                opacity: .9;
+                height: 8rem;
+            }
+
+            .z2 {
+                background-image: url('./imgs/h12.jpg');
+                opacity: .9;
+                height: 25rem;
+            }
+
+            .z3 {
+                background-image: url('https://wallpaperscraft.com/image/the_legend_of_zelda_windows_elf_character_link_22308_1920x1080.jpg');
+                height: 10rem;
+            }
+
+            .btn-primary {
+                background-color: #fff !important;
+                color: rgb(175, 173, 170);
+                border-radius: 10px;
+                border-style: none;
+                transform: translate(2rem, 1rem);
+            }
+
+            .background-new {
+                background-color: #C1B6B4 !important;
+            }
+
+            .home-main {
+                border-radius: 50%;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .home-main a {
+                line-height: 2rem;
+                text-align: center;
+                padding: 30px 20px;
+
+                background-color: whitesmoke;
+                color: rgb(200, 172, 172);
+                border-radius: 50%;
+
+            }
+
+            a:hover,
+            a:visited,
+            a:focus,
+            a:active,
+            a.active {
+                text-decoration: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="btn btn-primary">bg</div>
+    <div class="home-main"><a class=" home" href="./creative2-first.html">home!</a></div>
+    <div id="slider">
+        <div class="dp-wrap">
+            <div id="dp-slider">
+
+                <div class="dp_item" data-class="1" data-position="1">
+                    <div class="dp-content">
+
+                        <h2>白色的圓</h2>
+                        <p> 嘎啦嘎啦市集
+                            <br>
+                            2021.03.13-03.14
+                            <br>
+                            台北市吉林路141號3樓
+                        </p>
+                        <a href="#" class="site-btn">Read More…</a>
+                    </div>
+                    <div class="dp-img">
+                        <img class="img-fluid" src="./imgs/白色的圓.jpg" alt="investing">
+                    </div>
+                </div>
+
+                <div class="dp_item" data-class="2" data-position="2">
+                    <div class="dp-content">
+                        <h2>與春天邂逅</h2>
+                        <p> 嘎啦嘎啦市集
+                            <br>
+                            2021.03.27-03.28
+                            <br>
+                            台北市吉林路141號3樓
+                        </p>
+                        <a href="#" class="site-btn">Read More…</a>
+                    </div>
+                    <div class="dp-img">
+                        <img class="img-fluid" src="./imgs/嘎啦嘎啦-春天.jpg" alt="investing">
+                    </div>
+                </div>
+
+                <div class="dp_item" data-class="3" data-position="3">
+                    <div class="dp-content">
+
+                        <h2>SimpleMarket 手作市集</h2>
+                        <p> 簡單生活市集
+                            <br>
+                            2021.03.21
+                            <br>
+                            台北市信義區松勤街54號 四四南村
+                        </p>
+                        <a href="#" class="site-btn">Read More…</a>
+                    </div>
+                    <div class="dp-img">
+                        <img class="img-fluid" src="./imgs/簡單繩活大圖2.jpg" alt="investing">
+                    </div>
+                </div>
+
+                <div class="dp_item" data-class="4" data-position="4">
+                    <div class="dp-content">
+
+                        <h2>好好玖月／新竹風之市</h2>
+                        <p> 好好手感微笑市集
+                            <br>
+                            2021.09.12-09.13
+                            <br>
+                            新竹市新竹公園
+                        </p>
+                        <a href="#" class="site-btn">Read More…</a>
+                    </div>
+                    <div class="dp-img">
+                        <img class="img-fluid" src="./imgs/20200912.jpg" alt="investing">
+                    </div>
+                </div>
+            </div>
+
+            <span id="dp-next">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51.401 51.401">
+                    <defs>
+                        <style>
+                            .cls-1 {
+                                fill: none;
+                                stroke: rgb(175, 126, 107);
+                                stroke-miterlimit: 10;
+                                stroke-width: 7px;
+                            }
+                        </style>
+                    </defs>
+                    <path id="Rectangle_4_Copy" data-name="Rectangle 4 Copy" class="cls-1" d="M32.246,0V33.178L0,31.953"
+                        transform="translate(0.094 25.276) rotate(-45)" />
+                </svg>
+            </span>
+
+            <span id="dp-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51.401 51.401">
+                    <defs>
+                        <style>
+                            .cls-1 {
+                                fill: none;
+                                stroke: rgb(175, 126, 107);
+                                stroke-miterlimit: 10;
+                                stroke-width: 7px;
+                            }
+                        </style>
+                    </defs>
+                    <path id="Rectangle_4_Copy" data-name="Rectangle 4 Copy" class="cls-1" d="M32.246,0V33.178L0,31.953"
+                        transform="translate(0.094 25.276) rotate(-45)" />
+                </svg>
+            </span>
+
+            <ul id="dp-dots">
+                <li data-class="1" class="active"></li>
+                <li data-class="2"></li>
+                <li data-class="3"></li>
+                <li data-class="4"></li>
+            </ul>
+        </div>
+    </div>
+    <h1>Look!Creative Market!</h1>
+
+    <div class="container">
+        <div class="market-info-box">
+            <div class="market-title">
+                好好手感微笑市集
+            </div>
+            <div class="info-img-text">
+                <div class="img-container">
+                    <img src="./imgs/20200222_04.jpg">
+                </div>
+                <div class="info-text">
+                    以創意激盪、質感行銷、互助互惠、友善溫暖為號召，
+                    <br>
+                    歡迎以創作為志趣的所有人加入，期望營造
+                    〈友善微型手作市集聚落〉。
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="bg-simple">
+        <div class="container">
+            <div class="market-info-box market-second">
+                <div class="market-title">
+                    簡單市集
+                </div>
+                <div class="info-img-text">
+
+                    <div class="info-text">
+                        手作市集：出自於原創作者的親自創作，用旺盛的設計力為自己發聲。
+                        <br>
+                        二手市集：二手商品交流/老物收藏及資源再利用。
+                        <br>
+                        主題市集：每月會安排不同的主題活動，主題內容符合之品牌即可入選。
+                    </div>
+                    <div class="img-container simple">
+                        <img src="./imgs/簡單生活.jfif">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="market-info-box">
+            <div class="market-title">
+                嘎啦嘎啦市集
+            </div>
+            <div class="info-img-text">
+                <div class="img-container">
+                    <img src="./imgs/嘎啦嘎啦.jfif">
+                </div>
+                <div class="info-text">
+                    「Let’s keep our fingers crossed 」
+                    <br>&nbsp;
+                    讓你心裡的嘎啦嘎啦話被更多的人聽見，讓你的創作被更多人看見。
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="parallax z1"></div>
+    <div class="parallax z2"></div>
+    <div class="parallax z3"></div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            function detect_active() {
+                // get active
+                var get_active = $("#dp-slider .dp_item:first-child").data("class");
+                $("#dp-dots li").removeClass("active");
+                $("#dp-dots li[data-class=" + get_active + "]").addClass("active");
+            }
+            $("#dp-next").click(function () {
+                var total = $(".dp_item").length;
+                $("#dp-slider .dp_item:first-child").hide().appendTo("#dp-slider").fadeIn();
+                $.each($(".dp_item"), function (index, dp_item) {
+                    $(dp_item).attr("data-position", index + 1);
+                });
+                detect_active();
+            });
+
+            $("#dp-prev").click(function () {
+                var total = $(".dp_item").length;
+                $("#dp-slider .dp_item:last-child").hide().prependTo("#dp-slider").fadeIn();
+                $.each($(".dp_item"), function (index, dp_item) {
+                    $(dp_item).attr("data-position", index + 1);
+                });
+
+                detect_active();
+            });
+
+            $("#dp-dots li").click(function () {
+                $("#dp-dots li").removeClass("active");
+                $(this).addClass("active");
+                var get_slide = $(this).attr("data-class");
+                console.log(get_slide);
+                $("#dp-slider .dp_item[data-class=" + get_slide + "]")
+                    .hide()
+                    .prependTo("#dp-slider")
+                    .fadeIn();
+                $.each($(".dp_item"), function (index, dp_item) {
+                    $(dp_item).attr("data-position", index + 1);
+                });
+            });
+
+            $("body").on("click", "#dp-slider .dp_item:not(:first-child)", function () {
+                var get_slide = $(this).attr("data-class");
+                console.log(get_slide);
+                $("#dp-slider .dp_item[data-class=" + get_slide + "]")
+                    .hide()
+                    .prependTo("#dp-slider")
+                    .fadeIn();
+                $.each($(".dp_item"), function (index, dp_item) {
+                    $(dp_item).attr("data-position", index + 1);
+                });
+
+                detect_active();
+            });
+        });
+
+        $('.btn-primary').click(function (event) {
+            event.preventDefault();
+            console.log('hi')
+            $('body').toggleClass('background-new').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                $(this).removeClass('background-new');
+            });
+        });
+
+    </script>
+</body>
+
+</html>

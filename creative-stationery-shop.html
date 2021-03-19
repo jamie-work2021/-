@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>各地文具房</title>
+    <style>
+        @media screen and (min-width: 200px) and (max-width: 960px) {
+            body {
+                background-color: #C1B6B4;
+                margin: 0;
+                padding: 0;
+                font-family: 'Noto Serif TC', serif;
+
+            }
+
+            h1 {
+                color: rgb(255, 255, 255);
+            }
+
+
+
+            .c-container {
+                margin: auto;
+                width: 93%;
+                position: relative;
+                z-index: 1;
+            }
+
+
+            .card-view {
+                -webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.05);
+                box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.05);
+                border-radius: 4px;
+                padding: 22px;
+                margin-bottom: 20px;
+                background: rgba(255, 255, 255, 0.959);
+            }
+
+            .flex-row {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                margin-right: -15px;
+                margin-left: -15px;
+            }
+
+            .spacer {
+                padding-top: 50px;
+                padding-bottom: 50px;
+            }
+
+            .bg-gray {
+                background: #F8F8F8;
+            }
+
+            .no-margin {
+                margin: 0 !important;
+            }
+
+            .flex-row .flex-col {
+                -ms-flex-preferred-size: 0;
+                flex-basis: 0;
+                -webkit-box-flex: 1;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+                max-width: 100%;
+                position: relative;
+                width: 100%;
+                min-height: 1px;
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+
+            /* common css up */
+            .timeline {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                position: relative;
+            }
+
+            .timeline li.right {
+                margin-left: auto;
+            }
+
+            .timeline li:first-child {
+                margin-top: 0;
+            }
+
+            .timeline li {
+                width: 47%;
+                position: relative;
+                margin-top: 50px;
+            }
+
+            .timeline:before {
+                content: '';
+                width: 4px;
+                height: 100%;
+                background: #e4e4e4a9;
+                display: block;
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            .timeline li:before {
+                content: '';
+                --size: 16px;
+                width: var(--size);
+                height: var(--size);
+                background: #754a44b6;
+                display: block;
+                position: absolute;
+                left: -48px;
+                border-radius: 50%;
+            }
+
+            .time-thumb-row {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                /* display: flex; */
+                margin-bottom: 5px;
+            }
+
+            img.tool-to-liveby {
+                max-width: 133px;
+            }
+
+            .tool {
+                margin-left: 13px;
+            }
+
+            .tool-2 {
+                width: 100px;
+                height: 100px;
+                margin-left: 10px;
+                border-radius: 50%;
+            }
+
+            .tool-3 {
+                width: 100px;
+                height: 100px;
+                margin-left: 10px;
+                /* border-radius: 50%; */
+            }
+
+            .pen {
+                width: 20px;
+                height: 20px;
+            }
+
+            .time-thumb-row .time-content {
+                margin-left: 2px;
+                margin-top: 20px;
+            }
+
+            .time-thumb-row .time-content h4 {
+                margin: 0;
+                color: #000000;
+                font-weight: bold;
+                font-size: 16px;
+                text-align: left;
+                padding-bottom: 20px;
+            }
+
+            .time-thumb-row .time-content time {
+                font-size: 15.85px;
+                color: #000000;
+            }
+
+            .img-container-1 img {
+                width: 120px;
+                height: 180px;
+            }
+
+            .timeline li.left:before {
+                left: inherit;
+                right: -48px;
+            }
+
+            .width100 {
+                width: 100%;
+                max-height: 500px;
+                object-fit: cover;
+                object-position: center;
+            }
+
+
+            .fade-in[data-scroll] {
+                opacity: 0;
+                will-change: transform, scale, opacity;
+                -webkit-transform: translateY(6rem) scale(0.93);
+                transform: translateY(6rem) scale(0.93);
+                transition: all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+
+            .fade-in-right[data-scroll] {
+                opacity: 0;
+                will-change: transform, scale, opacity;
+                -webkit-transform: translatex(6rem) scale(0.93);
+                transform: translatex(6rem) scale(0.93);
+                transition: all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+
+            .fade-in-left[data-scroll] {
+                opacity: 0;
+                will-change: transform, scale, opacity;
+                -webkit-transform: translatex(-6rem) scale(0.93);
+                transform: translatex(-6rem) scale(0.93);
+                transition: all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+
+            .fade-in[data-scroll="in"],
+            .fade-in-right[data-scroll="in"],
+            .fade-in-left[data-scroll="in"] {
+                opacity: 1;
+                -webkit-transform: translateY(0) scale(1);
+                transform: translateY(0) scale(1);
+            }
+
+            p {
+                color: #5d5d5d;
+                line-height: 1.5;
+            }
+
+            .home-main {
+                border-radius: 50%;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .home-main a {
+                line-height: 2rem;
+                text-align: center;
+                padding: 20px 10px;
+
+                background-color: whitesmoke;
+                color: rgb(200, 172, 172);
+                border-radius: 50%;
+
+            }
+
+
+        }
+
+        @media screen and (min-width: 961px) and (max-width: 1940px) {
+            body {
+                background-color: #C1B6B4;
+                margin: 0;
+                padding: 0;
+                font-family: 'Noto Serif TC', serif;
+
+            }
+
+            h1 {
+                color: rgb(255, 255, 255);
+            }
+
+
+
+            .c-container {
+                margin: auto;
+                width: 93%;
+                position: relative;
+                z-index: 1;
+            }
+
+
+            .card-view {
+                -webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.05);
+                box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.05);
+                border-radius: 4px;
+                padding: 22px;
+                margin-bottom: 20px;
+                background: rgba(255, 255, 255, 0.959);
+            }
+
+            .flex-row {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                margin-right: -15px;
+                margin-left: -15px;
+            }
+
+            .spacer {
+                padding-top: 50px;
+                padding-bottom: 50px;
+            }
+
+            .bg-gray {
+                background: #F8F8F8;
+            }
+
+            .no-margin {
+                margin: 0 !important;
+            }
+
+            .flex-row .flex-col {
+                -ms-flex-preferred-size: 0;
+                flex-basis: 0;
+                -webkit-box-flex: 1;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+                max-width: 100%;
+                position: relative;
+                width: 100%;
+                min-height: 1px;
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+
+            /* common css up */
+            .timeline {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                position: relative;
+            }
+
+            .timeline li.right {
+                margin-left: auto;
+            }
+
+            .timeline li:first-child {
+                margin-top: 0;
+            }
+
+            .timeline li {
+                width: 47%;
+                position: relative;
+                margin-top: 50px;
+            }
+
+            .timeline:before {
+                content: '';
+                width: 4px;
+                height: 100%;
+                background: #e4e4e4a9;
+                display: block;
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            .timeline li:before {
+                content: '';
+                --size: 16px;
+                width: var(--size);
+                height: var(--size);
+                background: #754a44b6;
+                display: block;
+                position: absolute;
+                left: -48px;
+                border-radius: 50%;
+            }
+
+            .time-thumb-row {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                /* display: flex; */
+                margin-bottom: 5px;
+            }
+
+            img.tool-to-liveby {
+                max-width: 133px;
+                margin-left: -95px;
+                margin-bottom: -26px;
+
+            }
+
+            .tool {
+                margin-left: 13px;
+            }
+
+            .tool-2 {
+                width: 100px;
+                height: 100px;
+                margin-left: 10px;
+                border-radius: 50%;
+            }
+
+            .tool-3 {
+                width: 100px;
+                height: 100px;
+                margin-left: 10px;
+                /* border-radius: 50%; */
+            }
+
+            .pen {
+                width: 20px;
+                height: 20px;
+            }
+
+            .time-thumb-row .time-content {
+                margin-left: 2px;
+                margin-top: 20px;
+            }
+
+            .time-thumb-row .time-content h4 {
+                margin: 0;
+                color: #000000;
+                font-weight: bold;
+                font-size: 16px;
+                text-align: left;
+                padding-bottom: 20px;
+            }
+
+            .time-thumb-row .time-content time {
+                font-size: 15.85px;
+                color: #000000;
+            }
+
+            .img-container-1 img {
+                margin-left: 10px;
+                width: 250px;
+                height: 180px;
+            }
+
+            .timeline li.left:before {
+                left: inherit;
+                right: -48px;
+            }
+
+            .width100 {
+                width: 100%;
+                max-height: 500px;
+                object-fit: cover;
+                object-position: center;
+            }
+
+
+            .fade-in[data-scroll] {
+                opacity: 0;
+                will-change: transform, scale, opacity;
+                -webkit-transform: translateY(6rem) scale(0.93);
+                transform: translateY(6rem) scale(0.93);
+                transition: all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+
+            .fade-in-right[data-scroll] {
+                opacity: 0;
+                will-change: transform, scale, opacity;
+                -webkit-transform: translatex(6rem) scale(0.93);
+                transform: translatex(6rem) scale(0.93);
+                transition: all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+
+            .fade-in-left[data-scroll] {
+                opacity: 0;
+                will-change: transform, scale, opacity;
+                -webkit-transform: translatex(-6rem) scale(0.93);
+                transform: translatex(-6rem) scale(0.93);
+                transition: all 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+
+            .fade-in[data-scroll="in"],
+            .fade-in-right[data-scroll="in"],
+            .fade-in-left[data-scroll="in"] {
+                opacity: 1;
+                -webkit-transform: translateY(0) scale(1);
+                transform: translateY(0) scale(1);
+            }
+
+            p {
+                color: #5d5d5d;
+                line-height: 1.5;
+            }
+
+            .flex-box {
+                display: flex;
+            }
+
+            .home-main {
+                border-radius: 50%;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .home-main a {
+                line-height: 2rem;
+                text-align: center;
+                padding: 30px 20px;
+
+                background-color: whitesmoke;
+                color: rgb(200, 172, 172);
+                border-radius: 50%;
+
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+
+    <body>
+        <div class="home-main"><a class=" home" href="./creative2-first.html">home!</a></div>
+        <h1 style="text-align: center;">各地文具房</h1>
+        <section class="c-container" style="position: static;">
+            <ul class="timeline">
+                <li class="right">
+                    <div class="card-view fade-in" data-scroll>
+                        <div class="flex-box">
+                            <div class="ff-flex">
+                                <div class="time-thumb-row">
+
+                                    <div class="time-thumb">
+
+                                        <img class="tool" src="./imgs/ttlb-icon.svg" alt="">
+                                        <img class="tool-to-liveby" src="./imgs/tools-to.svg" alt="">
+
+                                    </div>
+
+                                </div>
+                                <div class="time-content">
+                                    <h4><img class="pen" src="./imgs/penpen.png">
+                                        台北
+                                        <br>
+                                        禮拜文房具
+                                    </h4>
+
+                                    <time>Tue.-Sun. 12:00- 21:00 PM</time>
+                                </div>
+                            </div>
+                            <div class="img-container-1">
+                                <img class="width100" src="./imgs/禮拜文具房-直.jpg" alt="">
+                            </div>
+                        </div>
+                </li>
+                <li class="left">
+                    <div class="card-view fade-in" data-scroll>
+
+
+                        <div class="time-thumb-row">
+                            <div class="flex-box">
+                                <div class="time-thumb">
+                                    <div class="time-thumb">
+
+                                        <img class="tool-2" src="./imgs/直物-logo.jpg" alt="">
+                                    </div>
+                                    <div class="time-content">
+                                        <h4><img class="pen" src="./imgs/penpen.png">
+                                            台北
+                                            <br>
+                                            直物生活文具
+                                        </h4>
+
+                                        <time>Wed.-Mon. 14:00- 21:00 PM</time>
+                                    </div>
+                                </div>
+                                <div class="img-container-1">
+                                    <img class="width100" src="./imgs/直物-橫.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </li>
+                <li class="right">
+                    <div class="card-view fade-in" data-scroll>
+                        <div class="flex-box">
+                            <div class="ff-flex">
+                                <div class="time-thumb-row">
+                                    <div class="time-thumb">
+
+                                        <img class="tool-3" src="./imgs/小鹿logo.jpg" alt="">
+
+
+                                    </div>
+
+                                </div>
+                                <div class="time-content">
+                                    <h4><img class="pen" src="./imgs/penpen.png">
+                                        桃園
+                                        <br>
+                                        小鹿文具所
+                                    </h4>
+
+                                    <time>Wed.-Sun. 14:00- 20:00 PM</time>
+                                </div>
+                            </div>
+                            <div class="img-container-1">
+                                <img class="width100" src="./imgs/小鹿文具所-light.jpg" alt="">
+                            </div>
+                        </div>
+                </li>
+                <li class="left">
+                    <div class="card-view fade-in" data-scroll>
+
+                        <div class="time-thumb-row">
+                            <div class="flex-box">
+                                <div class="time-thumb">
+                                    <div class="time-thumb">
+
+                                        <img class="tool-3" src="./imgs/愛治logo.png" alt="">
+                                    </div>
+                                    <div class="time-content">
+                                        <h4><img class="pen" src="./imgs/penpen.png">
+                                            彰化
+                                            <br>
+                                            愛治文具房
+                                        </h4>
+
+                                        <time>Wed.-Sun. 12:30- 19:00 PM</time>
+                                    </div>
+                                </div>
+                                <div class="img-container-1">
+                                    <img class="width100" src="./imgs/愛治文具.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+
+                </li>
+
+            </ul>
+        </section>
+
+        <script src="https://md-aqil.github.io/images/scroll-out.js"></script>
+        <script>
+
+
+        </script>
+        <script>
+            ScrollOut({
+                cssProps: {
+                    visibleY: true,
+                    viewportY: true
+                },
+            });
+        </script>
+    </body>
+</body>
+
+</html>
